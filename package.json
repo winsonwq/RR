@@ -1,0 +1,27 @@
+{
+  "name": "RR",
+  "version": "1.0.0",
+  "description": "RR - Reactive React. A super tiny but purely reactive implementation of Flux architecture.",
+  "main": "index.js",
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/winsonwq/RR.git"
+  },
+  "keywords": [
+    "reactive",
+    "react",
+    "flux",
+    "RxJS",
+    "Observable"
+  ],
+  "author": "Wang Qiu <winsonwq@gmail.com> (http://slender-man.github.io/)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/winsonwq/RR/issues"
+  },
+  "homepage": "https://github.com/winsonwq/RR",
+  "dependencies": {
+    "rx": "^2.3.25"
+  }
+}
