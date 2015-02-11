@@ -1,6 +1,6 @@
 {
   "name": "reactive-react",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "RR - Reactive React. A super tiny but purely reactive implementation of Flux architecture.",
   "main": "index.js",
   "scripts": {},
@@ -22,6 +22,6 @@
   },
   "homepage": "https://github.com/winsonwq/RR",
   "dependencies": {
-    "rx": "^2.3.25"
+    "rx": "*"
   }
 }
