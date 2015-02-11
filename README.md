@@ -11,6 +11,15 @@ $ npm install reactive-react --save
 
 ## Example
 
+### Run example
+
+```bash
+$ cd examples/
+$ npm i
+$ npm run bundle
+$ open index.html
+```
+
 ### Create Observable Actions
 
 ```js
