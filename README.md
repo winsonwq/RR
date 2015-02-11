@@ -6,7 +6,7 @@ RR - Reactive React
 ## Installation
 
 ```bash
-$ npm install RR --save
+$ npm install reactive-react --save
 ```
 
 ## Example
