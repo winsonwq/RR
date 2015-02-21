@@ -3,6 +3,7 @@ var Rx = require('rx');
 var RR = require('reactive-react');
 
 var Creater = require('./creater.react');
+var Remover = require('./remover.react');
 var VoteButtons = require('./vote-buttons.react');
 
 var Votes = require('../stores/votes.store');
@@ -38,6 +39,7 @@ var App = React.createClass({
     return (
       <div>
         <Creater />
+        <Remover />
         {voteButtonList}
       </div>
     );

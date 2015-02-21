@@ -1,12 +1,17 @@
 var RR = require('reactive-react');
 var PlusMinusAction = require('../actions/votes.action');
 
-var Votes = RR.Observable.createStore(PlusMinusAction, ['plusMinus$', 'create$'], function(pm$, c$) {
+var Votes = RR.Observable.createStore(PlusMinusAction, ['plusMinus$', 'create$', 'remove$'], function(pm$, c$, r$) {
   var data = { 1: { id: 1, val: 10 } };
 
   var create$ = c$.scan(data, function(sofar, curr) {
     var id = Date.now();
     sofar[id] = { id: id, val: curr.val };
+    return sofar;
+  });
+
+  var remove$ = r$.scan(data, function(sofar, curr) {
+    for(var prop in sofar) delete sofar[prop];
     return sofar;
   });
 
@@ -17,7 +22,7 @@ var Votes = RR.Observable.createStore(PlusMinusAction, ['plusMinus$', 'create$']
   });
 
   return {
-    data$: create$.merge(pmMerge$).startWith(data)
+    data$: create$.merge(remove$).merge(pmMerge$).startWith(data)
   };
 });
 
