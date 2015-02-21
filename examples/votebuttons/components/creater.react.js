@@ -10,8 +10,10 @@ var Creater = React.createClass({
     return Rx.Observable.fromEvent(createOne, 'click').map({ val: 10 });
   },
 
-  handleClick: RR.Observable.bind('create2$', function(evt) {
-    return evt.target.tagName;
+  handleClick: RR.Observable.bind('create2$', function(observable) {
+    return observable.map(function(evt) {
+      return evt.target.tagName;
+    }).distinctUntilChanged();
   }),
 
   render: function() {
