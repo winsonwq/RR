@@ -10,9 +10,13 @@ var Creater = React.createClass({
     return Rx.Observable.fromEvent(createOne, 'click').map({ val: 10 });
   },
 
+  handleClick: RR.Observable.bind('create2$', function(evt) {
+    return evt.target.tagName;
+  }),
+
   render: function() {
     return (
-      <button ref="createBtn">create one vote</button>
+      <button ref="createBtn" onClick={this.handleClick}>create one vote</button>
     );
   }
 

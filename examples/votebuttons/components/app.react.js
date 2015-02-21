@@ -33,7 +33,7 @@ var App = React.createClass({
   render: function() {
 
     var voteButtonList = this.state.data.map(function(vote) {
-      return <VoteButtons id={vote.id} val={vote.val} />;
+      return <VoteButtons key={vote.id} id={vote.id} val={vote.val} />;
     });
 
     return (

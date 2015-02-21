@@ -12,7 +12,7 @@ var Remover = React.createClass({
 
   render: function() {
     return (
-      <button ref="removeBtn">remove first vote</button>
+      <button ref="removeBtn">remove all</button>
     );
   }
 
