@@ -1,7 +1,7 @@
 RR - Reactive React
 ===================
 
-> A super tiny but purely reactive (based on [RxJS](https://github.com/Reactive-Extensions/RxJS)) implementation of [Flux](http://facebook.github.io/flux/) architecture.
+> A super tiny but purely reactive (based on [RxJS](https://github.com/Reactive-Extensions/RxJS)) implementation of [Flux](http://facebook.github.io/flux/) architecture. React-Native Supported !
 
 ## Installation
 
