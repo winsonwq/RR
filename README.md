@@ -3,6 +3,13 @@ RR - Reactive React
 
 > A super tiny but purely reactive (based on [RxJS](https://github.com/Reactive-Extensions/RxJS)) implementation of [Flux](http://facebook.github.io/flux/) architecture. React-Native Supported !
 
+## Wiki
+
+1. [Create Observable React View](https://github.com/winsonwq/RR/wiki/Create-Observable-React-View)
+2. [Create Observable Action](https://github.com/winsonwq/RR/wiki/Create-Observable-Action)
+3. [Create Observable Store](https://github.com/winsonwq/RR/wiki/Create-Observable-Store)
+4. [Example - Vote Buttons](https://github.com/winsonwq/RR/wiki/Example-(Vote-Buttons))
+
 ## Installation
 
 ```bash
