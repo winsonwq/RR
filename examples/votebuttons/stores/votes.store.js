@@ -3,7 +3,6 @@ var PlusMinusAction = require('../actions/votes.action');
 
 var Votes = RR.Observable.createStore(
     PlusMinusAction, ['plusMinus$', 'create$', 'remove$'],
-    PlusMinusAction, ['plusMinus$', 'create$', 'remove$'],
     function(pm$, c$, r$, pm2$) {
       var data = { 1: { id: 1, val: 10 } };
 
