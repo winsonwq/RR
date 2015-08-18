@@ -3,7 +3,7 @@ var PlusMinusAction = require('../actions/votes.action');
 
 var Votes = RR.Observable.createStore(
     PlusMinusAction, ['plusMinus$', 'create$', 'remove$'],
-    function(pm$, c$, r$, pm2$) {
+    function(pm$, c$, r$) {
       var data = { 1: { id: 1, val: 10 } };
 
       var create$ = c$.scan(data, function(sofar, curr) {
@@ -17,7 +17,7 @@ var Votes = RR.Observable.createStore(
         return sofar;
       });
 
-      var pmMerge$ = pm2$.scan(data, function(sofar, curr, idx) {
+      var pmMerge$ = pm$.scan(data, function(sofar, curr, idx) {
         sofar[curr.id] = sofar[curr.id] || { id: curr.id, val: 0 };
         sofar[curr.id].val += curr.val;
         return sofar;

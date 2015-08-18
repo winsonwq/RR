@@ -1,18 +1,31 @@
 var RR = require('reactive-react');
 
-var PlusMinusAction = RR.Observable.createAction(
-  ['plus$', 'minus$', 'create$', 'remove$', 'create2$'],
-  function(plus$, minus$, create$, remove$, create2$) {
+// var PlusMinusAction = RR.Observable.createAction(
+//   // ['plus$', 'minus$', 'create$', 'remove$'],
+//   function(plus$, minus$, create$, remove$) {
+//
+//     return {
+//       plusMinus$: plus$.merge(minus$),
+//       create$: create$,
+//       remove$: remove$
+//     };
+//
+//   });
 
-    create2$.subscribe(function(val) {
-      console.log(val);
-    });
+var PlusMinusAction = RR.Observable.createAction({
 
-    return {
-      plusMinus$: plus$.merge(minus$),
-      create$: create$,
-      remove$: remove$
-    };
-  });
+  plusMinus$: function(plus$, minus$) {
+    return plus$.merge(minus$);
+  },
+
+  create$: function(create$) {
+    return create$;
+  },
+
+  remove$: function(remove$) {
+    return remove$;
+  }
+
+});
 
 module.exports = PlusMinusAction;

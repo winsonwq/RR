@@ -4,7 +4,8 @@
   "description": "Reactive React example - Vote buttons",
   "main": "index.js",
   "scripts": {
-    "bundle": "browserify index.js > bundle.js"
+    "bundle": "browserify index.js > bundle.js",
+    "watch": "watchify index.js -o bundle.js"
   },
   "author": "Wang Qiu <winsonwq@gmail.com> (http://slender-man.github.io/)",
   "license": "MIT",
