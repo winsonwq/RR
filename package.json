@@ -1,6 +1,6 @@
 {
   "name": "reactive-react",
-  "version": "1.8.4",
+  "version": "1.9.0",
   "description": "RR - Reactive React. A super tiny but purely reactive implementation of Flux architecture.",
   "main": "index.js",
   "scripts": {},
