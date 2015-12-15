@@ -1,6 +1,6 @@
 {
   "name": "reactive-react",
-  "version": "1.9.1",
+  "version": "2.0.0",
   "description": "RR - Reactive React. A super tiny but purely reactive implementation of Flux architecture.",
   "main": "index.js",
   "scripts": {},
@@ -23,5 +23,10 @@
   "homepage": "https://github.com/winsonwq/RR",
   "dependencies": {
     "rx": "*"
+  },
+  "devDependencies": {
+    "babel-eslint": "^5.0.0-beta6",
+    "eslint": "^1.10.3",
+    "eslint-plugin-react": "^3.11.3"
   }
 }
