@@ -206,4 +206,4 @@ const RR = {
   Observable,
 };
 
-export default RR;
+export = RR;
