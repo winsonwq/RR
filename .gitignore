@@ -29,3 +29,4 @@ node_modules
 .DS_Store
 bundle.js
 bundle.min.js
+dist/tsconfig.tsbuildinfo

@@ -1,1 +1,1 @@
-module.exports = require('./lib/RR.js');
+module.exports = require('./dist/RR.js');

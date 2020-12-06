@@ -1,9 +1,12 @@
 {
   "name": "reactive-react",
-  "version": "2.1.0",
+  "version": "3.0.0",
   "description": "RR - Reactive React. A super tiny but purely reactive implementation of Flux architecture.",
   "main": "index.js",
-  "scripts": {},
+  "scripts": {
+    "watch": "tsc -w --listFiles -p lib --outDir dist",
+    "build": "tsc --emitDeclarationOnly -d lib/RR.ts"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/winsonwq/RR.git"
@@ -33,8 +36,7 @@
     "rx": "global:Rx"
   },
   "devDependencies": {
-    "babel-eslint": "^5.0.0-beta6",
-    "eslint": "^1.10.3",
-    "eslint-plugin-react": "^3.11.3"
+    "@types/rx": "^4.1.2",
+    "typescript": "^4.1.2"
   }
 }

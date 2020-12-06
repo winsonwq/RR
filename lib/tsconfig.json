@@ -1,0 +1,13 @@
+{
+    "compilerOptions": {
+      "skipLibCheck": true,
+      "incremental": true,
+      "module": "commonjs",
+      "target": "es5",
+      "noImplicitAny": false,
+      "sourceMap": false,
+      "resolveJsonModule": true
+    },
+    "include": ["./**/*"],
+    "exclude": []
+  }
