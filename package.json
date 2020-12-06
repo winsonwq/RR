@@ -2,10 +2,11 @@
   "name": "reactive-react",
   "version": "3.0.0",
   "description": "RR - Reactive React. A super tiny but purely reactive implementation of Flux architecture.",
-  "main": "index.js",
+  "main": "./dist/index.js",
+  "types": "lib/index.d.ts",
   "scripts": {
     "watch": "tsc -w --listFiles -p lib --outDir dist",
-    "build": "tsc --emitDeclarationOnly -d lib/RR.ts"
+    "build": "tsc --emitDeclarationOnly -d lib/index.ts"
   },
   "repository": {
     "type": "git",
