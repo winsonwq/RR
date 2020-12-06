@@ -8,9 +8,9 @@ interface IAction {
   [key: string]: Rx.IObservable<any>;
 }
 
-type ObservableTransFunc = <T>(
-  ...args
-) => Rx.IObservable<T>;
+type ObservableTransFunc = (
+  ...args: Rx.Observable<any>[]
+) => Rx.IObservable<any>;
 
 interface IActionConfig {
   [key: string]: ObservableTransFunc;

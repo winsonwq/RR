@@ -7,8 +7,8 @@ interface Pos {
 }
 
 const action = RR.Observable.createAction({
-  a$() {
-    return new Rx.Subject();
+  a$(b$) {
+    return b$
   },
 });
 

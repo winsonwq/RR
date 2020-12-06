@@ -3,8 +3,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var Rx = require("rx");
 var RR = require("../RR");
 var action = RR.Observable.createAction({
-    a$: function () {
-        return new Rx.Subject();
+    a$: function (b$) {
+        return b$;
     },
 });
 var action2 = RR.Observable.createAction(['a$', 'b$'], function (a$, b$) {
