@@ -6,7 +6,8 @@
       "target": "es5",
       "noImplicitAny": false,
       "sourceMap": false,
-      "resolveJsonModule": true
+      "resolveJsonModule": true,
+      "outDir": "dist"
     },
     "include": ["./**/*"],
     "exclude": []

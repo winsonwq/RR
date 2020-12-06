@@ -126,6 +126,9 @@ var RR = {
         });
         return ret;
     },
+    getObservable: function (name) {
+        return _getObservable(name);
+    },
     Observable: Observable,
 };
 module.exports = RR;

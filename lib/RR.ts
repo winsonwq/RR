@@ -203,6 +203,10 @@ const RR = {
     return ret;
   },
 
+  getObservable<T>(name: string): Rx.ISubject<T> {
+    return _getObservable<T>(name);
+  },
+
   Observable,
 };
 
