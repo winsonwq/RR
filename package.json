@@ -1,6 +1,6 @@
 {
   "name": "reactive-react",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "description": "RR - Reactive React. A super tiny but purely reactive implementation of Flux architecture.",
   "main": "./dist/index.js",
   "types": "lib/index.d.ts",
