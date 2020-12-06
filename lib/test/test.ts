@@ -1,5 +1,5 @@
 import * as Rx from 'rx';
-import RR from '../RR';
+import * as RR from '../RR';
 
 interface Pos {
   x: number;
