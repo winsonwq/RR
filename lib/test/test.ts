@@ -1,15 +1,19 @@
 import * as Rx from 'rx';
-import * as RR from '../RR';
+import RR, { ObservableTransFunc } from '../RR';
 
 interface Pos {
   x: number;
   y: number;
 }
 
-const action = RR.Observable.createAction({
-  a$(b$) {
-    return b$
-  },
+interface ILessonAction {
+  a$(): ObservableTransFunc<Pos>
+}
+
+const action = RR.Observable.createAction<ILessonAction>({
+  a$() {
+    return null;
+  }
 });
 
 const action2 = RR.Observable.createAction(

@@ -1,16 +1,16 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var Rx = require("rx");
-var RR = require("../RR");
-var action = RR.Observable.createAction({
-    a$: function (b$) {
-        return b$;
-    },
+var RR_1 = require("../RR");
+var action = RR_1.default.Observable.createAction({
+    a$: function () {
+        return null;
+    }
 });
-var action2 = RR.Observable.createAction(['a$', 'b$'], function (a$, b$) {
+var action2 = RR_1.default.Observable.createAction(['a$', 'b$'], function (a$, b$) {
     return {
         c$: new Rx.Subject(),
     };
 });
-var bindFunc = RR.Observable.bind('hello$', null);
+var bindFunc = RR_1.default.Observable.bind('hello$', null);
 bindFunc({});

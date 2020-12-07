@@ -1,12 +1,12 @@
 {
   "name": "reactive-react",
-  "version": "3.0.4",
+  "version": "3.0.5",
   "description": "RR - Reactive React. A super tiny but purely reactive implementation of Flux architecture.",
-  "main": "./dist/RR.js",
-  "types": "lib/RR.d.ts",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
   "scripts": {
     "watch": "tsc -w --listFiles -p lib --outDir dist",
-    "build": "rm -rf dist && tsc --emitDeclarationOnly -d lib/RR.ts && tsc --listFiles -p lib --outDir dist"
+    "build": "rm -rf dist && tsc --listFiles -p lib"
   },
   "repository": {
     "type": "git",

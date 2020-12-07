@@ -1,31 +1,33 @@
 import * as Rx from 'rx';
 
+type ExtractFuncGenericType<
+  T
+> = T extends ObservableTransFunc<infer P> ? P : any;
+
 interface IObservablePool {
   [key: string]: Rx.ISubject<any>;
 }
 
-interface IAction {
-  [key: string]: Rx.IObservable<any>;
-}
+type Action<T> = {
+  [key in keyof T]: Rx.IObservable<
+    ExtractFuncGenericType<T[key]>
+  >;
+};
 
-type ObservableTransFunc = (
+export type ObservableTransFunc<T> = (
   ...args: Rx.Observable<any>[]
-) => Rx.IObservable<any>;
-
-interface IActionConfig {
-  [key: string]: ObservableTransFunc;
-}
+) => Rx.IObservable<T>;
 
 interface IObservableStatic {
-  createAction(config: IActionConfig): IAction;
+  createAction<T>(config: T): Action<T>;
   // TODO: not well
-  createAction(
+  createAction<T>(
     names: string[],
-    func: (...args) => object
-  ): IAction;
+    func: (...args: Rx.Observable<any>[]) => Action<T>
+  ): Action<T>;
   bind(
     observableName: string,
-    transform: any
+    transform?: any
   ): (obj) => void;
 }
 
@@ -113,11 +115,11 @@ function _assignReplicatedSubject(context) {
 }
 
 const Observable: IObservableStatic = {
-  createAction(...args): IAction {
+  createAction<T>(...args): Action<T> {
     let dependencies = [],
       register,
       extend;
-    let action = {};
+    let action: any = {};
 
     if (argumentsAre(args, ['object'])) {
       let config = args[0];
@@ -210,4 +212,4 @@ const RR = {
   Observable,
 };
 
-export = RR;
+export default RR;

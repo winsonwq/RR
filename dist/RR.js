@@ -1,4 +1,5 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 var Rx = require("rx");
 var _observablePool = {};
 function _replicate(source, subject) {
@@ -131,4 +132,4 @@ var RR = {
     },
     Observable: Observable,
 };
-module.exports = RR;
+exports.default = RR;
