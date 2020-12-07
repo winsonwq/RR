@@ -8,13 +8,16 @@
 /// <reference types="rx-lite-joinpatterns" />
 /// <reference types="rx-lite-time" />
 import * as Rx from 'rx';
-declare type ExtractFuncGenericType<T> = T extends ObservableTransFunc<infer P> ? P : any;
+declare type ExtractObservableGenericType<T> = T extends Rx.IObservable<infer P> ? P : any;
+declare type ObservableTransFunc<T> = (...args: Rx.Observable<any>[]) => Rx.IObservable<T>;
 declare type Action<T> = {
-    [key in keyof T]: Rx.IObservable<ExtractFuncGenericType<T[key]>>;
+    [key in keyof T]: Rx.Observable<ExtractObservableGenericType<T[key]>>;
 };
-export declare type ObservableTransFunc<T> = (...args: Rx.Observable<any>[]) => Rx.IObservable<T>;
+declare type ActionConfig<T> = {
+    [key in keyof T]: ObservableTransFunc<ExtractObservableGenericType<T[key]>>;
+};
 interface IObservableStatic {
-    createAction<T>(config: T): Action<T>;
+    createAction<T>(config: ActionConfig<T>): Action<T>;
     createAction<T>(names: string[], func: (...args: Rx.Observable<any>[]) => Action<T>): Action<T>;
     bind(observableName: string, transform?: any): (obj: any) => void;
 }
@@ -23,4 +26,4 @@ declare const RR: {
     getObservable<T>(name: string): Rx.ISubject<T>;
     Observable: IObservableStatic;
 };
-export default RR;
+export = RR;

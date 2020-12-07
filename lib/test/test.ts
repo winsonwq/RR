@@ -1,5 +1,5 @@
 import * as Rx from 'rx';
-import RR, { ObservableTransFunc } from '../RR';
+import * as RR from '../RR';
 
 interface Pos {
   x: number;
@@ -7,23 +7,29 @@ interface Pos {
 }
 
 interface ILessonAction {
-  a$(): ObservableTransFunc<Pos>
+  a$: Rx.IObservable<string>;
+  b$: Rx.IObservable<Pos>;
 }
 
 const action = RR.Observable.createAction<ILessonAction>({
   a$() {
     return null;
-  }
+  },
+  b$() {
+    return null;
+  },
 });
 
-const action2 = RR.Observable.createAction(
-  ['a$', 'b$'],
-  function (a$, b$) {
-    return {
-      c$: new Rx.Subject(),
-    };
-  }
-);
+action.a$.subscribe((item) => item.length);
+
+const action2 = RR.Observable.createAction<ILessonAction>(['a$', 'b$'], function (a$, b$) {
+  return {
+    a$: new Rx.Subject(),
+    b$: new Rx.Subject(),
+  };
+});
+
+action2.b$.subscribe(p => p.x);
 
 const bindFunc = RR.Observable.bind('hello$', null);
 bindFunc({});

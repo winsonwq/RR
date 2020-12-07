@@ -1,42 +1,30 @@
 import * as Rx from 'rx';
 
-type ExtractFuncGenericType<
-  T
-> = T extends ObservableTransFunc<infer P> ? P : any;
+type ExtractObservableGenericType<T> = T extends Rx.IObservable<infer P> ? P : any;
+type ObservableTransFunc<T> = (...args: Rx.Observable<any>[]) => Rx.IObservable<T>;
 
 interface IObservablePool {
   [key: string]: Rx.ISubject<any>;
 }
 
 type Action<T> = {
-  [key in keyof T]: Rx.IObservable<
-    ExtractFuncGenericType<T[key]>
-  >;
+  [key in keyof T]: Rx.Observable<ExtractObservableGenericType<T[key]>>;
 };
 
-export type ObservableTransFunc<T> = (
-  ...args: Rx.Observable<any>[]
-) => Rx.IObservable<T>;
+type ActionConfig<T> = {
+  [key in keyof T]: ObservableTransFunc<ExtractObservableGenericType<T[key]>>;
+};
 
 interface IObservableStatic {
-  createAction<T>(config: T): Action<T>;
+  createAction<T>(config: ActionConfig<T>): Action<T>;
   // TODO: not well
-  createAction<T>(
-    names: string[],
-    func: (...args: Rx.Observable<any>[]) => Action<T>
-  ): Action<T>;
-  bind(
-    observableName: string,
-    transform?: any
-  ): (obj) => void;
+  createAction<T>(names: string[], func: (...args: Rx.Observable<any>[]) => Action<T>): Action<T>;
+  bind(observableName: string, transform?: any): (obj) => void;
 }
 
 const _observablePool: IObservablePool = {};
 
-function _replicate<T>(
-  source: Rx.IObservable<T>,
-  subject: Rx.Subject<T>
-) {
+function _replicate<T>(source: Rx.IObservable<T>, subject: Rx.Subject<T>) {
   return source.subscribe(
     function onOnNext(x) {
       setTimeout(() => {
@@ -53,8 +41,7 @@ function _replicate<T>(
 }
 
 function _getObservable<T>(name) {
-  return (_observablePool[name] =
-    _observablePool[name] || new Rx.Subject<T>());
+  return (_observablePool[name] = _observablePool[name] || new Rx.Subject<T>());
 }
 
 function _replicatedSubject(source) {
@@ -69,24 +56,15 @@ function getArgumentsNames(fn: Function): string[] {
     .split(/,/);
 }
 
-function argumentsAre(
-  args: any[],
-  types: ('object' | 'array' | 'function')[]
-) {
+function argumentsAre(args: any[], types: ('object' | 'array' | 'function')[]) {
   return types
     .map(function (type, idx) {
       if (type == 'object') {
-        return (
-          !!args[idx] &&
-          !('length' in args[idx]) &&
-          typeof args[idx] == 'object'
-        );
+        return !!args[idx] && !('length' in args[idx]) && typeof args[idx] == 'object';
       } else if (type == 'array') {
         return !!args[idx] && 'length' in args[idx];
       } else if (type == 'function') {
-        return (
-          !!args[idx] && typeof args[idx] == 'function'
-        );
+        return !!args[idx] && typeof args[idx] == 'function';
       } else {
         return !!args[idx];
       }
@@ -123,21 +101,13 @@ const Observable: IObservableStatic = {
 
     if (argumentsAre(args, ['object'])) {
       let config = args[0];
-      action = Object.keys(config).reduce(function (
-        ext,
-        key
-      ) {
+      action = Object.keys(config).reduce(function (ext, key) {
         defineMemorizedGetter(ext, key, function () {
-          var deps = getArgumentsNames(config[key]).map(
-            _getObservable
-          );
-          return _replicatedSubject(
-            config[key].apply(ext, deps)
-          );
+          var deps = getArgumentsNames(config[key]).map(_getObservable);
+          return _replicatedSubject(config[key].apply(ext, deps));
         });
         return ext;
-      },
-      action);
+      }, action);
     } else {
       if (argumentsAre(args, ['array', 'function'])) {
         dependencies = args[0];
@@ -147,16 +117,10 @@ const Observable: IObservableStatic = {
         dependencies = getArgumentsNames(register);
       }
 
-      extend = register.apply(
-        action,
-        dependencies.map(_getObservable)
-      );
+      extend = register.apply(action, dependencies.map(_getObservable));
 
       for (let prop in extend) {
-        _assignReplicatedSubject(action)(
-          extend[prop],
-          prop
-        );
+        _assignReplicatedSubject(action)(extend[prop], prop);
       }
     }
 
@@ -174,10 +138,7 @@ const Observable: IObservableStatic = {
           disposable.dispose();
           subject = new Rx.Subject();
         }
-        disposable = _replicate(
-          trans.apply(this, [subject, this]),
-          _getObservable(observableName)
-        );
+        disposable = _replicate(trans.apply(this, [subject, this]), _getObservable(observableName));
         context = this;
       }
 
@@ -187,13 +148,8 @@ const Observable: IObservableStatic = {
 };
 
 const RR = {
-  replicate(
-    source: Rx.IObservable<any>,
-    name: string = null
-  ) {
-    var sub = name
-      ? _getObservable(name)
-      : new Rx.Subject<any>();
+  replicate(source: Rx.IObservable<any>, name: string = null) {
+    var sub = name ? _getObservable(name) : new Rx.Subject<any>();
 
     var ret = Object.create(sub);
 
@@ -212,4 +168,4 @@ const RR = {
   Observable,
 };
 
-export default RR;
+export = RR;

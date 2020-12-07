@@ -1,5 +1,4 @@
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
 var Rx = require("rx");
 var _observablePool = {};
 function _replicate(source, subject) {
@@ -14,8 +13,7 @@ function _replicate(source, subject) {
     });
 }
 function _getObservable(name) {
-    return (_observablePool[name] =
-        _observablePool[name] || new Rx.Subject());
+    return (_observablePool[name] = _observablePool[name] || new Rx.Subject());
 }
 function _replicatedSubject(source) {
     return RR.replicate(source);
@@ -31,15 +29,13 @@ function argumentsAre(args, types) {
     return types
         .map(function (type, idx) {
         if (type == 'object') {
-            return (!!args[idx] &&
-                !('length' in args[idx]) &&
-                typeof args[idx] == 'object');
+            return !!args[idx] && !('length' in args[idx]) && typeof args[idx] == 'object';
         }
         else if (type == 'array') {
             return !!args[idx] && 'length' in args[idx];
         }
         else if (type == 'function') {
-            return (!!args[idx] && typeof args[idx] == 'function');
+            return !!args[idx] && typeof args[idx] == 'function';
         }
         else {
             return !!args[idx];
@@ -117,9 +113,7 @@ var Observable = {
 var RR = {
     replicate: function (source, name) {
         if (name === void 0) { name = null; }
-        var sub = name
-            ? _getObservable(name)
-            : new Rx.Subject();
+        var sub = name ? _getObservable(name) : new Rx.Subject();
         var ret = Object.create(sub);
         Object.defineProperties(ret, {
             subject: { value: sub },
@@ -132,4 +126,4 @@ var RR = {
     },
     Observable: Observable,
 };
-exports.default = RR;
+module.exports = RR;
