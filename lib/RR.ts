@@ -126,7 +126,7 @@ const Observable: IObservableStatic = {
 
     return action;
   },
-  bind(observableName: string, transform) {
+  bind(observableName: string, transform?) {
     var subject = new Rx.Subject(),
       trans = transform || ((x) => x),
       context = null,
