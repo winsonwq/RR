@@ -19,4 +19,25 @@ var action2 = RR.Observable.createAction(['a$', 'b$'], function (a$, b$) {
 });
 action2.b$.subscribe(function (p) { return p.x; });
 var bindFunc = RR.Observable.bind('hello$', null);
-bindFunc({});
+bindFunc('hello');
+var Either = /** @class */ (function () {
+    function Either(val) {
+        this.val = val;
+    }
+    return Either;
+}());
+var submitCourse = RR.Observable.bind('submitCourse$');
+function handleFormSubmit(evt) {
+    var formData = evt.formData;
+    submitCourse(new Either(formData));
+}
+var action3 = RR.Observable.createAction({
+    a$: function (submitCourse$) {
+        submitCourse$.map(function (either) { return either.val.name; });
+        return null;
+    },
+    b$: function () {
+        return null;
+    }
+});
+action3.b$.subscribe(function (pos) { return console.log(pos.x); });
