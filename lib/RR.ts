@@ -19,7 +19,7 @@ interface IObservableStatic {
   createAction<T>(config: ActionConfig<T>): Action<T>;
   // TODO: not well
   createAction<T>(names: string[], func: (...args: Rx.Observable<any>[]) => Action<T>): Action<T>;
-  bind(observableName: string, transform?: any): (obj) => void;
+  bind<T>(observableName: string, transform?: Function): (obj: T) => void;
 }
 
 const _observablePool: IObservablePool = {};
@@ -126,13 +126,13 @@ const Observable: IObservableStatic = {
 
     return action;
   },
-  bind(observableName: string, transform?) {
-    var subject = new Rx.Subject(),
+  bind<T>(observableName: string, transform?: Function) {
+    var subject = new Rx.Subject<T>(),
       trans = transform || ((x) => x),
       context = null,
       disposable = null;
 
-    return function (evt) {
+    return function (obj: T) {
       if (context !== this) {
         if (disposable) {
           disposable.dispose();
@@ -142,7 +142,7 @@ const Observable: IObservableStatic = {
         context = this;
       }
 
-      return subject.onNext(evt);
+      return subject.onNext(obj);
     };
   },
 };

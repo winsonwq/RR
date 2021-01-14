@@ -97,7 +97,7 @@ var Observable = {
     },
     bind: function (observableName, transform) {
         var subject = new Rx.Subject(), trans = transform || (function (x) { return x; }), context = null, disposable = null;
-        return function (evt) {
+        return function (obj) {
             if (context !== this) {
                 if (disposable) {
                     disposable.dispose();
@@ -106,7 +106,7 @@ var Observable = {
                 disposable = _replicate(trans.apply(this, [subject, this]), _getObservable(observableName));
                 context = this;
             }
-            return subject.onNext(evt);
+            return subject.onNext(obj);
         };
     },
 };

@@ -19,7 +19,7 @@ declare type ActionConfig<T> = {
 interface IObservableStatic {
     createAction<T>(config: ActionConfig<T>): Action<T>;
     createAction<T>(names: string[], func: (...args: Rx.Observable<any>[]) => Action<T>): Action<T>;
-    bind(observableName: string, transform?: any): (obj: any) => void;
+    bind<T>(observableName: string, transform?: Function): (obj: T) => void;
 }
 declare const RR: {
     replicate(source: Rx.IObservable<any>, name?: string): any;
